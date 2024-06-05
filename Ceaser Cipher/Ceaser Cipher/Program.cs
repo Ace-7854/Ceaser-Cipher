@@ -29,7 +29,9 @@ namespace Ceaser_Cipher
             if (Task == "D")
                 ;//Decrypt method here
             else if (Task == "E")
-                ;//Encrypt method here
+                Encrypt(cipher, alphabet, plaintext);
+
+            Console.ReadKey();
         }
 
         static string[] GetNewCipher(int Key, string[] Alphabet)
@@ -58,7 +60,7 @@ namespace Ceaser_Cipher
             }
         }
 
-        static void Encrypt(string[] Cipher, string[] Alphabet, string Plaintext)
+        static string Encrypt(string[] Cipher, string[] Alphabet, string Plaintext)
         {
             string Encrypted = "";
             for (int i = 0; i < Plaintext.Length; i++)
@@ -67,9 +69,15 @@ namespace Ceaser_Cipher
 
                 if (ItemToFind != " ")
                 {
-                    
+                    for (int j = 0; j < Alphabet.Length; j++)
+                    {
+                        if (ItemToFind == Alphabet[j])
+                            Encrypted = Encrypted + Cipher[i];
+                    }
                 }
             }
+
+            return Encrypted;
         }
 
         static void Decrypt(string[] Cipher, string[] Alphabet, string Plaintext)
