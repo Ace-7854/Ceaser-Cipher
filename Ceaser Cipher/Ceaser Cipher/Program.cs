@@ -12,9 +12,9 @@ namespace Ceaser_Cipher
         {
             Console.WriteLine("Please enter the key");
             int Key = int.Parse(Console.ReadLine());
-            
+
             Console.WriteLine("Enter the phrase");
-            string plaintext = Console.ReadLine();
+            string plaintext = Console.ReadLine().ToUpper();
 
             string[] alphabet = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z"
                 .Split(' ');
@@ -27,11 +27,11 @@ namespace Ceaser_Cipher
             string Task = Console.ReadLine().ToUpper();
 
             if (Task == "D")
-                ;//Decrypt method here
+                Console.WriteLine($"Your plaintext is: {Decrypt(cipher, alphabet, plaintext)}"); //Decrypt method here
             else if (Task == "E")
-                Encrypt(cipher, alphabet, plaintext);
+                Console.WriteLine($"Your ciphertext is: {Encrypt(cipher, alphabet, plaintext)}");
 
-            Console.ReadKey();
+        Console.ReadKey();
         }
 
         static string[] GetNewCipher(int Key, string[] Alphabet)
@@ -72,7 +72,7 @@ namespace Ceaser_Cipher
                     for (int j = 0; j < Alphabet.Length; j++)
                     {
                         if (ItemToFind == Alphabet[j])
-                            Encrypted = Encrypted + Cipher[i];
+                            Encrypted = Encrypted + Cipher[j];
                     }
                 }
             }
@@ -80,9 +80,24 @@ namespace Ceaser_Cipher
             return Encrypted;
         }
 
-        static void Decrypt(string[] Cipher, string[] Alphabet, string Plaintext)
+        static string Decrypt(string[] Cipher, string[] Alphabet, string Plaintext)
         {
-            
+            string Decrypted = "";
+            for (int i = 0; i < Plaintext.Length; i++)
+            {
+                string ItemToFind = Plaintext[i].ToString();
+
+                if (ItemToFind != " ")
+                {
+                    for (int j = 0; j < Cipher.Length; j++)
+                    {
+                        if (ItemToFind == Cipher[j])
+                            Decrypted = Decrypted + Alphabet[j];
+                    }
+                }
+            }
+
+            return Decrypted;
         }
     }
 }
